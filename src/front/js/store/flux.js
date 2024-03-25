@@ -264,10 +264,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createPayment: async (total) => {
 				try {
+					const store = getStore()
 					const response = await fetch(process.env.BACKEND_URL + '/create-payment', {
 						method: 'POST',
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
+							"Authorization": `Bearer ${store.token}`
 						},
 						body: JSON.stringify({ total })
 					});
@@ -276,8 +278,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error('Error:', error);
 					throw new Error('Error al crear el pago');
-				}
-			},
 			
 		}
 	}

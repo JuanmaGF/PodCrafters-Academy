@@ -12,7 +12,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity
 from flask_mail import Mail, Message
 import stripe
 
@@ -104,8 +104,10 @@ def contact():
     
 
 @app.route('/create-payment', methods=['POST'])
+@jwt_required()
 def create_payment():
     try:
+        user = get_jwt_identity()
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
@@ -114,7 +116,11 @@ def create_payment():
             }],
             mode='payment',
             success_url='https://sample-service-name-1krj.onrender.com/conteoregresivo',  
-            cancel_url='https://sample-service-name-1krj.onrender.com/',   
+            cancel_url='https://sample-service-name-1krj.onrender.com/', 
+            metadata = {
+                "user_email": user,
+                "curso_id": 
+            }  
         )
 
         return jsonify({'sessionId': session['id']}), 200
@@ -124,6 +130,7 @@ def create_payment():
         return jsonify({'sessionId': session['id']}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
