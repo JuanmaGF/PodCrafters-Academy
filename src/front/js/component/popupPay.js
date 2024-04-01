@@ -6,14 +6,14 @@ import "../../styles/popupPay.css";
 const PopupPay = ({ handleClosePopup }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const { actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
     const [errorMessage, setErrorMessage] = useState(null);
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false); 
-    const [isMounted, setIsMounted] = useState(true); 
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [isMounted, setIsMounted] = useState(true);
 
     useEffect(() => {
         return () => {
-            setIsMounted(false); 
+            setIsMounted(false);
         };
     }, []);
 
@@ -48,9 +48,9 @@ const PopupPay = ({ handleClosePopup }) => {
             setErrorMessage(error.message);
         } else {
             console.log(paymentMethod);
-            if (isMounted) { 
+            if (isMounted) {
                 handleClosePopup();
-                setShowSuccessMessage(true); 
+                setShowSuccessMessage(true);
             }
         }
     };
@@ -65,7 +65,7 @@ const PopupPay = ({ handleClosePopup }) => {
                     <button className="btn-pay" onClick={handlePagar}>Pagar</button>
                 </form>
             </div>
-            {showSuccessMessage && ( 
+            {showSuccessMessage && (
                 <div className="payment-success-message">
                     <h2>¡Pago completado con éxito!</h2>
                     <p>Tu pago ha sido procesado correctamente.</p>
