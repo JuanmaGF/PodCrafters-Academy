@@ -7,6 +7,7 @@ export const MiPerfil = () => {
     const { store, actions } = useContext(Context);
     const [newPassword, setNewPassword] = useState('');
     const [showChangePassword, setShowChangePassword] = useState(false);
+    
 
     // Estados para la edición del perfil
     const [editProfile, setEditProfile] = useState(false);
