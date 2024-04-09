@@ -122,7 +122,7 @@ def create_payment():
                     'unit_amount': c["precio"] * 100
                 }
             } )
-        print(line_items)
+        #print(line_items)
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items= line_items,
@@ -134,6 +134,7 @@ def create_payment():
                 "cursos": json.dumps(cursos)
             }  
         )
+        print(session)
 
         return jsonify({'sessionId': session['id']}), 200
     except Exception as e:
@@ -225,7 +226,7 @@ def webhook():
               )
               db.session.add(compra)
               db.session.commit()
-
+              
               modulos = Modulo.query.filter_by(id_curso = c['id'])
               modulos = list(map(lambda x: x.serialize(), modulos))
               print(modulos)

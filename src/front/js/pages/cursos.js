@@ -47,7 +47,7 @@ export const Cursos = () => {
                                         <h5 className="card-title">{curso.name}</h5>
                                         <p className="card-text">{curso.precio} €</p>
                                     </div>
-                                    <button className="btn btn-primary mt-auto" onClick={() => handleSaberMasClick(curso)}>Saber más</button>
+                                    <button className="btn btn-primary mt-auto" style={{backgroundColor: '#ff7f0e'}} onClick={() => handleSaberMasClick(curso)}>Saber más</button>
                                 </div>
                             </div>
                         </div>

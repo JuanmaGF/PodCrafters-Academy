@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import mentor1 from "../../img/mentor1.jpg";
@@ -8,7 +8,8 @@ import "../../styles/micurso.css";
 
 export const MiCurso = () => {
     const { store, actions } = useContext(Context);
-  
+    const [checkedStates, setCheckedStates] = useState([]);
+
     useEffect(() => {
         actions.getModulos();
         actions.getCursos();
@@ -17,6 +18,14 @@ export const MiCurso = () => {
     const primerCurso = store.cursos.length > 0 ? store.cursos[0].name : '';
     const modulosCurso = store.modulo ? store.modulo.filter(modulo => modulo.id_curso === 1) : [];
     
+    const handleClick = (index) => {
+        if (!checkedStates[index]) {
+            const newCheckedStates = [...checkedStates];
+            newCheckedStates[index] = true;
+            setCheckedStates(newCheckedStates);
+        }
+    };
+
     return (
         <div className="container">
             <div className="row">
@@ -40,13 +49,13 @@ export const MiCurso = () => {
                 <div className="col-md-10 mb-2">
                     {modulosCurso.map((modulo, index) => (
                         <Link to={`/modulo/${modulo.id}`} key={index} className="text-decoration-none">
-                            <div className="card rounded-pill mt-2 module-card" style={{ backgroundColor: "#9AC0CD" }}>
-                                <div className="card-body row">
+                            <div className="card rounded-pill mt-2 module-card" style={{ backgroundColor: "#9AC0CD" }} >
+                                <div className="card-body row" onClick={() => handleClick(index)}>
                                     <p className="bg-primary text-white rounded-circle p-3 col-md-1 d-flex align-items-center justify-content-center ms-2" style={{ width: '30px', height: '30px', margin: '0' }}>
                                         {index + 1}
                                     </p>
                                     <p className="col-md-9">{modulo.nombre_modulo}</p>
-                                    <i className="fa-solid fa-circle-check col-md-2 fs-2 text-primary text-end"></i>
+                                    <i className={`fa-solid fa-circle-check col-md-2 fs-2 ${checkedStates[index] ? 'text-primary' : ''} text-end`}></i>
                                 </div>
                             </div>
                         </Link>
