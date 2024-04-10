@@ -7,7 +7,7 @@ export const MiPerfil = () => {
     const { store, actions } = useContext(Context);
     const [newPassword, setNewPassword] = useState('');
     const [showChangePassword, setShowChangePassword] = useState(false);
-    
+   
 
     // Estados para la edición del perfil
     const [editProfile, setEditProfile] = useState(false);
@@ -29,7 +29,7 @@ export const MiPerfil = () => {
     };
 
   
-    
+  
     useEffect(() => {
         actions.verifyIdentity();
         actions.getCursos();
@@ -116,9 +116,10 @@ export const MiPerfil = () => {
                     </div>
                 </div>
 
-                <div className="ms-auto mb-3 text-center d-flex flex-column align-items-center">
-                    <p className="mb-0">Foto de perfil</p>
+                <div className="ms-auto mb-3 text-center d-flex flex-column align-items-center foto-perfil">
+                    <p className="mb-0 ">Foto de perfil</p>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="User Icon" style={{ width: '150px', height: '150px', borderRadius: '50%' }} />
+                  
                     <button> Cambiar foto de perfil</button>
                 </div>
             </div>

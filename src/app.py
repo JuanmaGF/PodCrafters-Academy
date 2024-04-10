@@ -159,7 +159,7 @@ def send_email():
         subject="Reset your password",
         sender=app.config.get("MAIL_USERNAME"),
         recipients=[email],
-        html='Reset your password in this link: <a href="' + link +'">Recuperar contraseña aqui</a>'
+        html='¡Hola!<br><br>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Si no solicitaste esto, por favor ignora este mensaje.<br><br>Para restablecer tu contraseña, haz clic en el siguiente enlace:<br><br><a href="' + link +'">Restablecer Contraseña</a><br><br>Gracias,<br>Equipo de PodCrafters Academy'
     )
 
     mail.send(message)

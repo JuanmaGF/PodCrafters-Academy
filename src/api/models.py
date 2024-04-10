@@ -13,7 +13,7 @@ class User(db.Model):
     lastName = db.Column(db.String(80), nullable=False)
     birthDay = db.Column(db.String(80), nullable=True)
     gender = db.Column(db.Enum("masculino", "femenino", "no_binario", name="gender_enum"), nullable=True)
-    profile_image = db.Column(LargeBinary)
+    profile_image = db.Column(db.LargeBinary)
     profesor = db.Column(db.Boolean, nullable=True)
     fecha_registro = db.Column(db.String(80), nullable=True)
     telephone = db.Column(db.String(20), nullable=True)
