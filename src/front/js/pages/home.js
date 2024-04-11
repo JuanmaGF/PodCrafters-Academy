@@ -29,7 +29,7 @@ export const Home = () => {
 				}
 			},
 			{
-				threshold: 0.5, 
+				threshold: 0.5,
 			}
 		);
 
@@ -165,7 +165,7 @@ export const Home = () => {
 									<h5 className="cardTitle">PodCrafter Iniciación</h5>
 									<p className="cardSubTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 								</div>
-								<a href="#" className="btn btnMainCurso">Saber más</a>
+								<a href="/cursos" className="btn btnMainCurso">Saber más</a>
 							</div>
 							<div className="card col-4 cardBody" >
 								<img src={PodCrafterIntermedio} className="card-img-top" alt="..." />
@@ -173,7 +173,7 @@ export const Home = () => {
 									<h5 className="cardTitle">PodCrafter Intermedio</h5>
 									<p className="cardSubTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 								</div>
-								<a href="#" className="btn btnMainCurso">Saber más</a>
+								<a href="/cursos" className="btn btnMainCurso">Saber más</a>
 							</div>
 						</div>
 
@@ -184,7 +184,7 @@ export const Home = () => {
 									<h5 className="cardTitle">PodCrafter Experimentado</h5>
 									<p className="cardSubTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 								</div>
-								<a href="#" className="btn btnMainCurso">Saber más</a>
+								<a href="/cursos" className="btn btnMainCurso">Saber más</a>
 							</div>
 							<div className="card col-4 cardBody" >
 								<img src={PodCrafterMaster} className="card-img-top" alt="..." />
@@ -192,7 +192,7 @@ export const Home = () => {
 									<h5 className="cardTitle">PodCrafter <br /> Master</h5>
 									<p className="cardSubTitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 								</div>
-								<a href="#" className="btn btnMainCurso">Saber más</a>
+								<a href="/cursos" className="btn btnMainCurso">Saber más</a>
 							</div>
 						</div>
 					</div>

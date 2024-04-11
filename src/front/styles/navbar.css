@@ -54,4 +54,5 @@
 .btnLogout:hover {
   background-color: #081f2e;
   color: #e2f4f4;
+  border: 2px solid #ff7f0e;
 }
