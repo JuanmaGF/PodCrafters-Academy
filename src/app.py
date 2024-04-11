@@ -153,7 +153,7 @@ def send_email():
         return jsonify({ "error": "Este usuario no existe"}), 401
    
     token = create_access_token(identity=email)
-    link = 'https://sample-service-name-1krj.onrender.com/recover?token=' + token
+    link = 'https://sample-service-name-xxsu.onrender.com/recover?token=' + token
    
     message = Message(
         subject="Reset your password",
