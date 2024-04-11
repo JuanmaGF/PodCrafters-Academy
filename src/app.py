@@ -16,7 +16,7 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from flask_mail import Mail, Message
 from datetime import datetime
 import stripe
-
+import requests
 stripe.api_key = "sk_test_51OtD4EFFwdFDHeIPh2VYkzCi9okYE4ndaNHSP3OSpP8SfLyAJwoQJ1RSXpW48z1kdqtP15Xf2nAxZuVHrbYr1krK00Djf2cSDh"
 endpoint_secret = "whsec_XtrepXaxTXc5XsIsyctTHSqCt2ymbGbD"
 
@@ -246,3 +246,34 @@ def webhook():
       print('Unhandled event type {}'.format(event['type']))
 
     return jsonify(success=True)
+def verify_google_token(google_token):
+    # URL para verificar el token de Google
+    url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + google_token
+
+    # Realizar una solicitud GET a la URL de verificación del token de Google
+    response = requests.get(url)
+
+    # Verificar el código de estado de la respuesta
+    if response.status_code == 200:
+        # Si la solicitud es exitosa, devolver True (el token es válido)
+        return True
+    else:
+        # Si la solicitud falla o el token es inválido, devolver False
+        return False
+    
+@app.route('/api/google-login', methods=['POST'])
+def google_login():
+    data = request.get_json()
+    # Aquí puedes manejar los datos recibidos del frontend después del inicio de sesión de Google
+    # Por ejemplo, puedes verificar el token de Google y devolver un token de acceso al cliente
+    # Aquí hay un ejemplo simple:
+    if "token" in data:
+        google_token = data["token"]
+        # Verifica el token de Google, si es válido, devuelve un token de acceso
+        if verify_google_token(google_token):
+            # Aquí generas un token de acceso para el cliente y lo devuelves
+            return jsonify({"access_token": "TOKEN_GENERADO"}), 200
+        else:
+            return jsonify({"error": "Token de Google inválido"}), 400
+    else:
+        return jsonify({"error": "Token de Google no proporcionado"}), 400

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/login.css";
 import loginImg from "../../../../public/images/login.png";
-
+import {gapi} from "gapi-script"
+import GoogleLogin from "react-google-login" 
 export const Login = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
@@ -18,6 +19,25 @@ export const Login = () => {
 
     function handleSignupClick() {
         navigate('/signup');
+    }
+
+    const clientID = '303124886371-sbe93u3udv073ggddo3tnmhiblt1nf19.apps.googleusercontent.com'
+    const [user, setUser] = useState({})
+    useEffect(() =>{
+       const start = () => {
+        gapi.auth2.init({
+            clientId: clientID,
+        })
+       }
+       gapi.load("client:auth2", start)
+    })
+    
+    const onSuccess = (response) => {
+        setUser(response.profileObj);
+    }
+
+    const onFailure = () => {
+        console.log("Algo salio mal")
     }
 
     return (
@@ -77,12 +97,13 @@ export const Login = () => {
                                                 <button className="btn btnIniciarSesion" type="submit">Iniciar sesión</button>
                                             </div>
                                             <div className="d-grid mt-2">
-                                                <a href="#!" className="btn btnGoogle">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-google" viewBox="0 0 16 16">
-                                                        <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z" />
-                                                    </svg>
-                                                    <span className="ms-2">Inicia sesión con Google</span>
-                                                </a>
+                                              
+                                                <GoogleLogin 
+                                                    clientId={clientID}
+                                                    onSuccess={onSuccess}
+                                                    onFailure={onFailure}
+                                                    cookiePolicy={"single_host_policy"}
+                                                />
                                             </div>
                                         </div>
                                     </form>
