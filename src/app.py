@@ -127,8 +127,8 @@ def create_payment():
             payment_method_types=['card'],
             line_items= line_items,
             mode='payment',
-            success_url='https://sample-service-name-1krj.onrender.com/conteoregresivo',  
-            cancel_url='https://sample-service-name-1krj.onrender.com/', 
+            success_url='https://sample-service-name-xxsu.onrender.com/conteoregresivo',  
+            cancel_url='https://sample-service-name-xxsu.onrender.com/', 
             metadata = {
                 "user_email": user,
                 "cursos": json.dumps(cursos)
